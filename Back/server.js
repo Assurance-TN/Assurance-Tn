@@ -13,7 +13,9 @@ app.use(cors())
 
 const userRoutes = require("./routes/user");
 
+
 app.use("/api/users", userRoutes);
+
 
 
 // Create uploads directory if it doesn't exist

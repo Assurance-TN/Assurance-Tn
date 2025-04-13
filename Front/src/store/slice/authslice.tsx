@@ -25,10 +25,13 @@ interface LoginCredentials {
 
 interface RegisterCredentials {
     userName: string;
-  email: string;
-  password: string;
-  role: 'client' | 'Manager' | 'Employe';
-  imageUrl?: string;
+    email: string;
+    password: string;
+    role?: 'client' | 'agent' | 'superviseur';
+    imageUrl?: string;
+    CIN: string;
+    adresse: string;
+    numéroTéléphone: string;
 }
 
 interface ApiError {

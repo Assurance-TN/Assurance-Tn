@@ -8,6 +8,9 @@ import AuthPersist from './FeatureAuth/AuthPersist';
 import { AuthPage } from './FeatureAuth/auth';
 import ErrorBoundary from './componenet/common/ErrorBoundary';
 import HomePage from './componenet/home/homepage';
+import  Homepageclient from './componenet/client/homepageclient';
+import  HomePageSuperviseur from './componenet/superviseur/homepagesuperviseur';
+import Homepageagent from './componenet/agent/homepageagent';
 
 // Create a ProtectedRoute component
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
@@ -41,6 +44,10 @@ function App() {
             <Route path="/login" element={<AuthPage />} />
             <Route path="/register" element={<AuthPage />} />
             <Route path="/homepage" element={<HomePage />} />
+            <Route path='/homepageclient' element={<Homepageclient/>} />
+            <Route path='/homepagesuperviseur' element={<HomePageSuperviseur />} />
+            <Route path='/homepageagent' element={<Homepageagent />} />
+          
           </Routes>
         </AuthPersist>
       </Router>

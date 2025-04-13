@@ -10,12 +10,12 @@ interface AuthTabProps {
 }
 
 const AuthTabs = ({ activeTab, setActiveTab }: AuthTabProps) => (
-  <div className="flex space-x-1 bg-yellow-100 p-1 rounded-lg mb-8">
+  <div className="flex space-x-1 bg-blue-50 p-1 rounded-lg mb-8">
     <button
       className={`w-1/2 py-2.5 text-sm font-medium rounded-md transition-all duration-300 ${
         activeTab === 'login'
-          ? 'bg-yellow-500 text-white shadow'
-          : 'text-yellow-700 hover:bg-yellow-200'
+          ? 'bg-blue-600 text-white shadow-md transform scale-105'
+          : 'text-blue-700 hover:bg-blue-100'
       }`}
       onClick={() => setActiveTab('login')}
     >
@@ -24,8 +24,8 @@ const AuthTabs = ({ activeTab, setActiveTab }: AuthTabProps) => (
     <button
       className={`w-1/2 py-2.5 text-sm font-medium rounded-md transition-all duration-300 ${
         activeTab === 'register'
-          ? 'bg-yellow-500 text-white shadow'
-          : 'text-yellow-700 hover:bg-yellow-200'
+          ? 'bg-blue-600 text-white shadow-md transform scale-105'
+          : 'text-blue-700 hover:bg-blue-100'
       }`}
       onClick={() => setActiveTab('register')}
     >
@@ -38,11 +38,11 @@ export const AuthPage = () => {
   const [activeTab, setActiveTab] = useState<'login' | 'register'>('login');
   
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-yellow-50 to-yellow-100 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full bg-white rounded-xl shadow-2xl p-8">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-white py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full bg-white rounded-xl shadow-lg p-8 transform hover:scale-[1.01] transition-transform duration-300">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-yellow-600 mb-2">Welcome to Dish-Dash</h1>
-          <p className="text-gray-600">Your favorite food delivery service</p>
+          <h1 className="text-4xl font-bold text-blue-600 mb-2">Welcome to Assurance TN</h1>
+          <p className="text-gray-600">Please sign in to continue</p>
         </div>
         
         <AuthTabs activeTab={activeTab} setActiveTab={setActiveTab} />
@@ -78,13 +78,13 @@ const LoginForm = () => {
       if (result.user && result.token) {
         switch (result.user.role) {
           case 'client':
-            navigate('/homepage');
+            navigate('/homepageclient');
             break;
-          case 'Manager':
-            navigate('/homepage');
+          case 'superviseur':
+            navigate('/homepagesuperviseur');
             break;
-          case 'Employe':
-            navigate('/homepage');
+          case 'agent':
+            navigate('/homepageagent');
             break;
           default:
             throw new Error('Invalid user role');
@@ -101,7 +101,7 @@ const LoginForm = () => {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       {(error || formError) && (
-        <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded">
+        <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded animate-fade-in">
           <p className="text-red-700">{error || formError}</p>
         </div>
       )}
@@ -113,7 +113,7 @@ const LoginForm = () => {
             type="email"
             value={credentials.email}
             onChange={(e) => setCredentials(prev => ({ ...prev, email: e.target.value }))}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-yellow-500 focus:ring-yellow-500"
+            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 transition duration-200"
             required
           />
         </div>
@@ -124,7 +124,7 @@ const LoginForm = () => {
             type="password"
             value={credentials.password}
             onChange={(e) => setCredentials(prev => ({ ...prev, password: e.target.value }))}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-yellow-500 focus:ring-yellow-500"
+            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 transition duration-200"
             required
           />
         </div>
@@ -133,7 +133,7 @@ const LoginForm = () => {
       <button
         type="submit"
         disabled={isLoading}
-        className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 disabled:opacity-50"
+        className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 transition duration-200 transform hover:scale-[1.02]"
       >
         {isLoading ? 'Signing in...' : 'Sign In'}
       </button>
@@ -149,11 +149,13 @@ const RegisterForm = () => {
     userName: '',
     email: '',
     password: '',
-    role: 'client' as 'client' | 'Manager' | 'Employe',
     imageUrl: '',
+    CIN: '',
+    adresse: '',
+    numéroTéléphone: ''
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCredentials({
       ...credentials,
       [e.target.name]: e.target.value,
@@ -162,16 +164,24 @@ const RegisterForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const resultAction = await dispatch(registerUser(credentials));
-    if (registerUser.fulfilled.match(resultAction)) {
-      navigate('/login');
+    try {
+      const resultAction = await dispatch(registerUser({ 
+        ...credentials, 
+        role: 'client'
+      }));
+      
+      if (registerUser.fulfilled.match(resultAction)) {
+        navigate('/login');
+      }
+    } catch (error) {
+      console.error('Registration error:', error);
     }
   };
 
   return (
     <form className="space-y-6" onSubmit={handleSubmit}>
       {error && (
-        <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded">
+        <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded animate-fade-in">
           <p className="text-red-700">{error}</p>
         </div>
       )}
@@ -186,7 +196,7 @@ const RegisterForm = () => {
             name="userName"
             type="text"
             required
-            className="appearance-none relative block w-full px-4 py-3 border border-gray-300 rounded-lg placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition duration-150 ease-in-out"
+            className="appearance-none relative block w-full px-4 py-3 border border-gray-300 rounded-lg placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
             placeholder="Enter your full name"
             value={credentials.userName}
             onChange={handleChange}
@@ -202,7 +212,7 @@ const RegisterForm = () => {
             name="email"
             type="email"
             required
-            className="appearance-none relative block w-full px-4 py-3 border border-gray-300 rounded-lg placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition duration-150 ease-in-out"
+            className="appearance-none relative block w-full px-4 py-3 border border-gray-300 rounded-lg placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
             placeholder="Enter your email"
             value={credentials.email}
             onChange={handleChange}
@@ -218,7 +228,7 @@ const RegisterForm = () => {
             name="password"
             type="password"
             required
-            className="appearance-none relative block w-full px-4 py-3 border border-gray-300 rounded-lg placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition duration-150 ease-in-out"
+            className="appearance-none relative block w-full px-4 py-3 border border-gray-300 rounded-lg placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
             placeholder="Create a password"
             value={credentials.password}
             onChange={handleChange}
@@ -226,21 +236,55 @@ const RegisterForm = () => {
         </div>
 
         <div>
-          <label htmlFor="role" className="block text-sm font-medium text-gray-700 mb-1">
-            I am a
+          <label htmlFor="CIN" className="block text-sm font-medium text-gray-700 mb-1">
+            CIN (National ID)
           </label>
-          <select
-            id="role"
-            name="role"
+          <input
+            id="CIN"
+            name="CIN"
+            type="text"
             required
-            className="appearance-none relative block w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition duration-150 ease-in-out"
-            value={credentials.role}
+            pattern="[0-9]{8}"
+            maxLength={8}
+            className="appearance-none relative block w-full px-4 py-3 border border-gray-300 rounded-lg placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
+            placeholder="Enter your 8-digit CIN"
+            value={credentials.CIN}
             onChange={handleChange}
-          >
-            <option value="client">client</option>
-            <option value="Manager">Manager </option>
-            <option value="Employe">Employe</option>
-          </select>
+          />
+        </div>
+
+        <div>
+          <label htmlFor="adresse" className="block text-sm font-medium text-gray-700 mb-1">
+            Address
+          </label>
+          <input
+            id="adresse"
+            name="adresse"
+            type="text"
+            required
+            className="appearance-none relative block w-full px-4 py-3 border border-gray-300 rounded-lg placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
+            placeholder="Enter your address"
+            value={credentials.adresse}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div>
+          <label htmlFor="numéroTéléphone" className="block text-sm font-medium text-gray-700 mb-1">
+            Phone Number
+          </label>
+          <input
+            id="numéroTéléphone"
+            name="numéroTéléphone"
+            type="tel"
+            required
+            pattern="[0-9]{8}"
+            maxLength={8}
+            className="appearance-none relative block w-full px-4 py-3 border border-gray-300 rounded-lg placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
+            placeholder="Enter your 8-digit phone number"
+            value={credentials.numéroTéléphone}
+            onChange={handleChange}
+          />
         </div>
 
         <div>
@@ -251,7 +295,7 @@ const RegisterForm = () => {
             id="imageUrl"
             name="imageUrl"
             type="text"
-            className="appearance-none relative block w-full px-4 py-3 border border-gray-300 rounded-lg placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition duration-150 ease-in-out"
+            className="appearance-none relative block w-full px-4 py-3 border border-gray-300 rounded-lg placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
             placeholder="Enter image URL"
             value={credentials.imageUrl}
             onChange={handleChange}
@@ -262,7 +306,7 @@ const RegisterForm = () => {
       <button
         type="submit"
         disabled={isLoading}
-        className="w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-yellow-500 hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 transition duration-150 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-200 transform hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {isLoading ? (
           <span className="flex items-center">
