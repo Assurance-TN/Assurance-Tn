@@ -11,6 +11,9 @@ import transportImg from './images/TRANSPORT MARCHANDISE.jpg';
 import voitureImg from './images/voiture.jpg';
 import voyagesImg from './images/voyages.jpg';
 import maison from './images/maison.jpg';
+import serviceImg from './images/Le meilleur service.jpg';
+import expertImg from './images/expert.jpg';
+import priseEnChargeImg from './images/prise en charge.jpg';
 
 const HomePage = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -71,6 +74,24 @@ const HomePage = () => {
       link: "/assurances-voyage",
       linkText: "ASSURANCES VOYAGE",
       devisLink: "/devis-voyage"
+    }
+  ];
+
+  const benefitsData = [
+    {
+      image: serviceImg,
+      title: "Le meilleur service d'assistance 24h/24 et 7j/7",
+      description: "Notre équipe d'assistance est disponible à tout moment pour répondre à vos besoins urgents."
+    },
+    {
+      image: priseEnChargeImg,
+      title: "Une prise en charge et un remboursement rapide",
+      description: "Nous traitons vos demandes avec efficacité pour vous offrir un remboursement sans délai."
+    },
+    {
+      image: expertImg,
+      title: "Un réseau de conseillers et experts sur toute la Côte d'Ivoire",
+      description: "Des professionnels qualifiés à votre service partout dans le pays pour un conseil personnalisé."
     }
   ];
 
@@ -175,6 +196,45 @@ const HomePage = () => {
             </div>
           </div>
         </div>
+
+        {/* Benefits Section */}
+        <div className="py-12 bg-white">
+          <div className="container mx-auto px-14">
+            <div className="max-w-1xl mx-auto">
+              <div className="flex flex-col md:flex-row items-center justify-between">
+                <div className="md:w-1/3 mb-100 md:mb-5 text-center md:text-left">
+                  <h2 className="text-3xl font-bold text-gray-900 mb-7">
+                    Chez Seven<br />ASSURANCES vous<br />avez en plus des<br />offres transparentes<br />et des tarifs adaptés:
+                  </h2>
+                </div>
+                <div className="md:w-2/3">
+                  <div className="flex flex-col md:flex-row justify-center gap-16">
+                    {benefitsData.map((benefit, index) => (
+                      <div key={index} className="flex flex-col items-center">
+                        <div className="h-80 w-full sm:w-[300px] mb-6 overflow-hidden rounded-lg shadow-md">
+                          <img
+                            src={benefit.image}
+                            alt={benefit.title}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                        <h3 className="text-lg font-semibold text-center text-gray-800 mb-2">{benefit.title}</h3>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="mt-12 text-center">
+              <a href="/about" className="inline-block bg-blue-400 hover:bg-red-500 text-black font-semibold py-3 px-8 rounded-full transition-colors">
+                Mieux connaître Seven ASSURANCES
+              </a>
+            </div>
+          </div>
+        </div>
+
+     
+     
 
         {/* Fixed Sidebar */}
         <div className="fixed right-0 top-1/2 transform -translate-y-1/2 bg-white shadow-lg rounded-l-lg z-50">
