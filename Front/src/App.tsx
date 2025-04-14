@@ -7,7 +7,7 @@ import { RootState } from './store/store';
 import AuthPersist from './FeatureAuth/AuthPersist';
 import { AuthPage } from './FeatureAuth/auth';
 import ErrorBoundary from './componenet/common/ErrorBoundary';
-import HomePage from './componenet/home/homepage';
+import HomePage from './componenet/website/homepage';
 import  Homepageclient from './componenet/client/homepageclient';
 import  HomePageSuperviseur from './componenet/superviseur/homepagesuperviseur';
 import Homepageagent from './componenet/agent/homepageagent';
