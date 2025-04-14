@@ -23,24 +23,22 @@ const Footer = () => {
           <div className="text-center md:text-left">
             <h3 className="font-bold text-gray-700 mb-2">ADRESSE</h3>
             <p className="text-gray-600">
-              GAT ASSURANCES 92-94 avenue<br />
-              Hédi Chaker-1002 Tunis<br />
-              Belvédère
+              13 BP 1769 Abidjan 13,<br />
+              Abidjan, Côte d'Ivoire
             </p>
           </div>
           <div className="text-center">
             <h3 className="font-bold text-gray-700 mb-2">E-MAIL</h3>
-            <a href="mailto:gat@gat.com.tn" className="text-gray-600 hover:text-red-600">
-              gat@gat.com.tn
+            <a href="mailto:sevenservicecommercial@gmail.com" className="text-gray-600 hover:text-red-600">
+              sevenservicecommercial@gmail.com
             </a>
           </div>
           <div className="text-center md:text-right">
             <h3 className="font-bold text-gray-700 mb-2">TÉLÉPHONE</h3>
             <p className="text-gray-600">
-              Siège social : +216 31 350 000 /<br />
-              +216 31 351 000<br />
-              Centre de Relation Client : +216<br />
-              31 334 333
+              Siège social : +225 2722423318<br />
+              Centre de Relation Client :<br />
+              +225 2722423318
             </p>
           </div>
         </div>
@@ -78,12 +76,11 @@ const Footer = () => {
         {/* Footer Bottom */}
         <div className="border-t border-gray-300 pt-6">
           <div className="flex flex-wrap justify-center text-sm text-gray-600">
-            <span className="px-2">© 2019 GAT ASSURANCES</span>
+            <span className="px-2">© 2023 Seven Assurances</span>
             <Link to="/conditions" className="px-2 hover:text-red-600">Conditions générales d'utilisation</Link>
             <Link to="/cookies" className="px-2 hover:text-red-600">Cookies</Link>
             <Link to="/mentions-legales" className="px-2 hover:text-red-600">Mentions légales</Link>
             <Link to="/plan-site" className="px-2 hover:text-red-600">Plan du site</Link>
-            <a href="http://www.medianet.com.tn" className="px-2 hover:text-red-600">Site web développé par www.medianet.com.tn</a>
           </div>
         </div>
       </div>

@@ -5,6 +5,12 @@ import image1 from './images/image1.jpg';
 import image2 from './images/image2.jpg';
 import image3 from './images/image3.jpg';
 import image4 from './images/image4.jpg';
+import santeImg from './images/santé.jpg';
+import scolaireImg from './images/SCOLAIRE.jpg';
+import transportImg from './images/TRANSPORT MARCHANDISE.jpg';
+import voitureImg from './images/voiture.jpg';
+import voyagesImg from './images/voyages.jpg';
+import maison from './images/maison.jpg';
 
 const HomePage = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -16,6 +22,57 @@ const HomePage = () => {
     }, 5000);
     return () => clearInterval(timer);
   }, []);
+
+  const insuranceCards = [
+    {
+      title: "Votre voiture",
+      description: "La meilleure offre sur le marché des assurances auto et des services d'assistance pour tous les budgets.",
+      image: voitureImg,
+      link: "/assurances-auto",
+      linkText: "ASSURANCES AUTO",
+      devisLink: "/devis-auto"
+    },
+    {
+      title: "Votre Maison",
+      description: "Assurez votre habitation contre les risques pour votre sécurité et celle de votre famille.",
+      image: maison, // Placeholder, replace with actual house image if available
+      link: "/assurances-habitation",
+      linkText: "ASSURANCES HABITATION",
+      devisLink: "/devis-habitation"
+    },
+    {
+      title: "Votre santé",
+      description: "Votre bien le plus précieux, en Tunisie ou à l'international, l'assurance maladie n'est plus une option !",
+      image: santeImg,
+      link: "/assurances-sante",
+      linkText: "ASSURANCES SANTÉ",
+      devisLink: "/devis-sante"
+    },
+    {
+      title: "Transport Marchandise",
+      description: "Sécurisez vos marchandises et protégez votre activité avec notre assurance transport adaptée à vos besoins.",
+      image: transportImg,
+      link: "/assurances-transport",
+      linkText: "ASSURANCES TRANSPORT",
+      devisLink: "/devis-transport"
+    },
+    {
+      title: "Assurance Scolaire",
+      description: "Protégez vos enfants à l'école et lors des activités périscolaires avec notre assurance dédiée.",
+      image: scolaireImg,
+      link: "/assurances-scolaire",
+      linkText: "ASSURANCES SCOLAIRE",
+      devisLink: "/devis-scolaire"
+    },
+    {
+      title: "Voyages",
+      description: "Voyagez l'esprit tranquille avec notre couverture complète pour tous vos déplacements à l'étranger.",
+      image: voyagesImg,
+      link: "/assurances-voyage",
+      linkText: "ASSURANCES VOYAGE",
+      devisLink: "/devis-voyage"
+    }
+  ];
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -65,6 +122,57 @@ const HomePage = () => {
                 onClick={() => setCurrentSlide(index)}
               />
             ))}
+          </div>
+        </div>
+
+        {/* Center Paragraph */}
+        <div className="py-16 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="max-w-3xl mx-auto text-center">
+              <h2 className="text-3xl font-bold text-gray-800 mb-6">Une assurance pour chaque détail de votre vie</h2>
+              <p className="text-xl text-gray-600 mb-4">Ne laissez plus votre vie et celle de votre famille entre les mains du hasard.</p>
+              <p className="text-xl font-semibold text-red-600">Seven Assurances vous protège en toutes circonstances</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Insurance Cards Section */}
+        <div className="py-16 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {insuranceCards.map((card, index) => (
+                <div key={index} className="bg-white rounded-lg overflow-hidden shadow-md transition-transform transform hover:scale-105">
+                  <div className="h-48 overflow-hidden">
+                    <img 
+                      src={card.image} 
+                      alt={card.title} 
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-2xl font-bold text-gray-800 mb-3">{card.title}</h3>
+                    <p className="text-gray-600 mb-4">{card.description}</p>
+                    <div className="flex flex-col space-y-3">
+                      <a 
+                        href={card.link} 
+                        className="text-red-600 font-bold hover:text-red-800 flex items-center"
+                      >
+                        {card.linkText}
+                        <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                      </a>
+                      <a 
+                        href={card.devisLink} 
+                        className="inline-block text-center border border-gray-300 rounded-full py-2 px-4 text-gray-800 hover:bg-gray-100 transition-colors"
+                      >
+                        Devis en ligne
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
