@@ -102,9 +102,9 @@ const ServicesAssistance = () => {
                   </li>
                 </ul>
                 <div className="mt-8">
-                  <a href="/espace-client" className="inline-block bg-white text-red-600 font-bold py-3 px-8 rounded-full transition-colors hover:bg-gray-100">
+                  <Link to="/register" className="inline-block bg-white text-red-600 font-bold py-3 px-8 rounded-full transition-colors hover:bg-gray-100">
                     Espace Client
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

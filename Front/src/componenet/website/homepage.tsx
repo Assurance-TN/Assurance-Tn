@@ -228,9 +228,9 @@ const HomePage = () => {
               </div>
             </div>
             <div className="mt-12 text-center">
-              <a href="/about" className="inline-block bg-blue-400 hover:bg-red-500 text-black font-semibold py-3 px-8 rounded-full transition-colors">
+              <Link to="/register" className="inline-block bg-blue-400 hover:bg-red-500 text-black font-semibold py-3 px-8 rounded-full transition-colors">
                 Mieux connaître Seven ASSURANCES
-              </a>
+              </Link>
             </div>
           </div>
         </div>
