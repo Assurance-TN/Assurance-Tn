@@ -76,7 +76,7 @@ const Footer = () => {
         {/* Footer Bottom */}
         <div className="border-t border-gray-300 pt-6">
           <div className="flex flex-wrap justify-center text-sm text-gray-600">
-            <span className="px-2">© 2023 Seven Assurances</span>
+            <span className="px-2">© 2025 Seven Assurances</span>
             <Link to="/conditions" className="px-2 hover:text-red-600">Conditions générales d'utilisation</Link>
             <Link to="/cookies" className="px-2 hover:text-red-600">Cookies</Link>
             <Link to="/mentions-legales" className="px-2 hover:text-red-600">Mentions légales</Link>

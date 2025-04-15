@@ -14,6 +14,7 @@ import maison from './images/maison.jpg';
 import serviceImg from './images/Le meilleur service.jpg';
 import expertImg from './images/expert.jpg';
 import priseEnChargeImg from './images/prise en charge.jpg';
+import { Link } from 'react-router-dom';
 
 const HomePage = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -183,12 +184,12 @@ const HomePage = () => {
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
                         </svg>
                       </a>
-                      <a 
-                        href={card.devisLink} 
+                      <Link 
+                        to="/contact" 
                         className="inline-block text-center border border-gray-300 rounded-full py-2 px-4 text-gray-800 hover:bg-gray-100 transition-colors"
                       >
                         Devis en ligne
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -233,29 +234,26 @@ const HomePage = () => {
           </div>
         </div>
 
-     
-     
-
         {/* Fixed Sidebar */}
         <div className="fixed right-0 top-1/2 transform -translate-y-1/2 bg-white shadow-lg rounded-l-lg z-50">
           <div className="flex flex-col space-y-8 p-4">
-            <a href="/assistance" className="flex flex-col items-center text-gray-600 hover:text-red-600 transition-colors">
+            <Link to="/services-assistance" className="flex flex-col items-center text-gray-600 hover:text-red-600 transition-colors">
               <div className="rounded-full p-2 bg-gray-100">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
                 </svg>
               </div>
               <span className="text-xs mt-1">Assistance</span>
-            </a>
-            <a href="/devis" className="flex flex-col items-center text-gray-600 hover:text-red-600 transition-colors">
+            </Link>
+            <Link to="/devis" className="flex flex-col items-center text-gray-600 hover:text-red-600 transition-colors">
               <div className="rounded-full p-2 bg-gray-100">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
               </div>
               <span className="text-xs mt-1">Demande<br/>de devis</span>
-            </a>
-            <a href="/nos-agences" className="flex flex-col items-center text-gray-600 hover:text-red-600 transition-colors">
+            </Link>
+            <Link to="/nos-agences" className="flex flex-col items-center text-gray-600 hover:text-red-600 transition-colors">
               <div className="rounded-full p-2 bg-gray-100">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -263,15 +261,15 @@ const HomePage = () => {
                 </svg>
               </div>
               <span className="text-xs mt-1">Nos<br/>agences</span>
-            </a>
-            <a href="/contact" className="flex flex-col items-center text-gray-600 hover:text-red-600 transition-colors">
+            </Link>
+            <Link to="/contact" className="flex flex-col items-center text-gray-600 hover:text-red-600 transition-colors">
               <div className="rounded-full p-2 bg-gray-100">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                 </svg>
               </div>
               <span className="text-xs mt-1">Contactez<br/>nous</span>
-            </a>
+            </Link>
           </div>
         </div>
       </main>

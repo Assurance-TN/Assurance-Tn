@@ -8,9 +8,14 @@ import AuthPersist from './FeatureAuth/AuthPersist';
 import { AuthPage } from './FeatureAuth/auth';
 import ErrorBoundary from './componenet/common/ErrorBoundary';
 import HomePage from './componenet/website/homepage';
+import ServicesAssistance from './componenet/website/Servicesd\'assistance';
+import Contact from './componenet/website/cantact';
 import  Homepageclient from './componenet/client/homepageclient';
 import  HomePageSuperviseur from './componenet/superviseur/homepagesuperviseur';
 import Homepageagent from './componenet/agent/homepageagent';
+import GoogleMap from './componenet/website/googlemap';
+import NosAgences from './componenet/website/nosagence';
+import Chatbot from './componenet/website/chatbot';
 
 // Create a ProtectedRoute component
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
@@ -39,16 +44,22 @@ function App() {
       <Router>
         <AuthPersist>
           <Routes>
-        
-        
             <Route path="/login" element={<AuthPage />} />
             <Route path="/register" element={<AuthPage />} />
             <Route path="/homepage" element={<HomePage />} />
+            <Route path="/" element={<HomePage />} />
+            <Route path="/services-assistance" element={<ServicesAssistance />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/devis" element={<Contact />} />
             <Route path='/homepageclient' element={<Homepageclient/>} />
             <Route path='/homepagesuperviseur' element={<HomePageSuperviseur />} />
             <Route path='/homepageagent' element={<Homepageagent />} />
-          
+            <Route path='/googlemap' element={<GoogleMap />} />
+            <Route path='/nos-agences' element={<NosAgences />} />
           </Routes>
+          
+          {/* Chatbot positioned at the bottom of the interface */}
+          <Chatbot />
         </AuthPersist>
       </Router>
     </ErrorBoundary>
