@@ -128,7 +128,7 @@ const AdminProfile = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg">
-      <h2 className="text-2xl font-bold text-gray-900 mb-6">Edit Profile</h2>
+      <h2 className="text-2xl font-bold text-gray-900 mb-6">Modifier le profil</h2>
 
       {message.content && (
         <div className={`p-4 rounded-md mb-6 ${
@@ -166,7 +166,7 @@ const AdminProfile = () => {
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           <div>
-            <label className="block text-sm font-medium text-gray-700">Username</label>
+            <label className="block text-sm font-medium text-gray-700">Nom d'utilisateur</label>
             <input
               type="text"
               name="userName"
@@ -188,7 +188,7 @@ const AdminProfile = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700">Password</label>
+            <label className="block text-sm font-medium text-gray-700">Mot de passe</label>
             <input
               type="password"
               name="password"
@@ -200,7 +200,7 @@ const AdminProfile = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700">Phone Number</label>
+            <label className="block text-sm font-medium text-gray-700">Numéro de téléphone</label>
             <input
               type="text"
               name="numéroTéléphone"
@@ -243,7 +243,7 @@ const AdminProfile = () => {
                 : 'bg-blue-600 hover:bg-blue-700'
             }`}
           >
-            {loading ? 'Updating...' : 'Update Profile'}
+            {loading ? 'Updating...' : 'Mettre à jour le profil'}
           </button>
         </div>
       </form>

@@ -177,13 +177,13 @@ const Dashboard = () => {
                     }}
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
                   >
-                    Edit Profile
+                   Modifier le profil
                   </button>
                   <button
                     onClick={handleLogout}
                     className="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 w-full text-left"
                   >
-                    Logout
+                   Déconnexion
                   </button>
                 </div>
               )}
@@ -220,7 +220,7 @@ const Dashboard = () => {
                 <svg className="mr-3 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                 </svg>
-                Users
+                Utilisateurs
               </button>
             </div>
           </nav>
@@ -230,7 +230,7 @@ const Dashboard = () => {
           <div className="py-6 px-8">
             {location.pathname === '/dashboard' ? (
               <div className="max-w-7xl mx-auto">
-                <h2 className="text-3xl font-bold text-gray-900 mb-8">Dashboard Overview</h2>
+                <h2 className="text-3xl font-bold text-gray-900 mb-8">Aperçu  dashboard</h2>
                 
                 {loading ? (
                   <div className="flex justify-center">
@@ -254,7 +254,7 @@ const Dashboard = () => {
                             </svg>
                           </div>
                           <div className="ml-4">
-                            <h3 className="text-lg font-medium text-gray-900">Total Users</h3>
+                            <h3 className="text-lg font-medium text-gray-900">Nombre total d'utilisateurs</h3>
                             <p className="text-3xl font-semibold text-gray-700">{stats.total}</p>
                           </div>
                         </div>
@@ -308,9 +308,9 @@ const Dashboard = () => {
                       {/* Pie Chart */}
                       <div className="bg-white rounded-lg shadow p-6">
                         <div className="flex justify-between items-center mb-4">
-                          <h3 className="text-lg font-medium text-gray-900">User Distribution</h3>
+                          <h3 className="text-lg font-medium text-gray-900">Répartition des utilisateurs</h3>
                           <Link to="/users" className="text-sm font-medium text-blue-600 hover:text-blue-800">
-                            View All
+                          Tout voir
                           </Link>
                         </div>
                         <div className="h-64">
@@ -339,9 +339,9 @@ const Dashboard = () => {
                       {/* Recent Users */}
                       <div className="bg-white rounded-lg shadow p-6">
                         <div className="flex justify-between items-center mb-4">
-                          <h3 className="text-lg font-medium text-gray-900">Recent Users</h3>
+                          <h3 className="text-lg font-medium text-gray-900">Utilisateurs récents</h3>
                           <Link to="/users" className="text-sm font-medium text-blue-600 hover:text-blue-800">
-                            View All
+                          Tout voir
                           </Link>
                         </div>
                         <div className="overflow-x-auto">
@@ -349,7 +349,7 @@ const Dashboard = () => {
                             <thead className="bg-gray-50">
                               <tr>
                                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                  Name
+                                Nom
                                 </th>
                                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                   Role

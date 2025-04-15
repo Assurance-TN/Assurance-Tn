@@ -48,7 +48,7 @@ const Login = () => {
             Admin Dashboard
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">
-            Sign in to your account
+          Connectez-vous à votre compte
           </p>
         </div>
 
@@ -62,7 +62,7 @@ const Login = () => {
           <div className="rounded-md shadow-sm space-y-4">
             <div>
               <label htmlFor="email" className="sr-only">
-                Email address
+                 Address Email
               </label>
               <input
                 id="email"
@@ -72,12 +72,12 @@ const Login = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="appearance-none rounded-lg relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
-                placeholder="Email address"
+                placeholder="Address Email"
               />
             </div>
             <div>
               <label htmlFor="password" className="sr-only">
-                Password
+              Mot de passe
               </label>
               <input
                 id="password"
@@ -87,7 +87,7 @@ const Login = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="appearance-none rounded-lg relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
-                placeholder="Password"
+                placeholder="Mot de passe"
               />
             </div>
           </div>

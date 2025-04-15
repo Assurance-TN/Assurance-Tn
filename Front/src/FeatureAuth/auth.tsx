@@ -19,7 +19,7 @@ const AuthTabs = ({ activeTab, setActiveTab }: AuthTabProps) => (
       }`}
       onClick={() => setActiveTab('login')}
     >
-      Sign In
+    Se connecter
     </button>
     <button
       className={`w-1/2 py-2.5 text-sm font-medium rounded-md transition-all duration-300 ${
@@ -29,7 +29,7 @@ const AuthTabs = ({ activeTab, setActiveTab }: AuthTabProps) => (
       }`}
       onClick={() => setActiveTab('register')}
     >
-      Sign Up
+   S'inscrire
     </button>
   </div>
 );
@@ -41,8 +41,8 @@ export const AuthPage = () => {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-white py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full bg-white rounded-xl shadow-lg p-8 transform hover:scale-[1.01] transition-transform duration-300">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-blue-600 mb-2">Welcome to Assurance TN</h1>
-          <p className="text-gray-600">Please sign in to continue</p>
+          <h1 className="text-4xl font-bold text-blue-600 mb-2">Bienvenue chez Assurance TN</h1>
+        
         </div>
         
         <AuthTabs activeTab={activeTab} setActiveTab={setActiveTab} />
@@ -119,7 +119,7 @@ const LoginForm = () => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700">Password</label>
+          <label className="block text-sm font-medium text-gray-700">Mot de passe</label>
           <input
             type="password"
             value={credentials.password}
@@ -135,7 +135,7 @@ const LoginForm = () => {
         disabled={isLoading}
         className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 transition duration-200 transform hover:scale-[1.02]"
       >
-        {isLoading ? 'Signing in...' : 'Sign In'}
+        {isLoading ? 'Connexion en cours...' : 'Connexion'}
       </button>
     </form>
   );
@@ -189,7 +189,7 @@ const RegisterForm = () => {
       <div className="space-y-4">
         <div>
           <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-            Full Name
+          Nom et prénom
           </label>
           <input
             id="name"
@@ -205,7 +205,7 @@ const RegisterForm = () => {
 
         <div>
           <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-            Email Address
+          Adresse email
           </label>
           <input
             id="email"
@@ -221,7 +221,7 @@ const RegisterForm = () => {
 
         <div>
           <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
-            Password
+          Mot de passe
           </label>
           <input
             id="password"
@@ -237,7 +237,7 @@ const RegisterForm = () => {
 
         <div>
           <label htmlFor="CIN" className="block text-sm font-medium text-gray-700 mb-1">
-            CIN (National ID)
+          CIN (carte d'identité nationale)
           </label>
           <input
             id="CIN"
@@ -271,7 +271,7 @@ const RegisterForm = () => {
 
         <div>
           <label htmlFor="numéroTéléphone" className="block text-sm font-medium text-gray-700 mb-1">
-            Phone Number
+          Numéro de téléphone
           </label>
           <input
             id="numéroTéléphone"
@@ -289,7 +289,7 @@ const RegisterForm = () => {
 
         <div>
           <label htmlFor="imageUrl" className="block text-sm font-medium text-gray-700 mb-1">
-            Profile Image URL (optional)
+          URL de l'image de profil (facultatif)
           </label>
           <input
             id="imageUrl"

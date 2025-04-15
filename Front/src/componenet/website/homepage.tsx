@@ -15,6 +15,7 @@ import serviceImg from './images/Le meilleur service.jpg';
 import expertImg from './images/expert.jpg';
 import priseEnChargeImg from './images/prise en charge.jpg';
 import { Link } from 'react-router-dom';
+import Chatbot from './chatbot';
 
 const HomePage = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -275,6 +276,7 @@ const HomePage = () => {
       </main>
 
       <Footer />
+      <Chatbot />
     </div>
   );
 };

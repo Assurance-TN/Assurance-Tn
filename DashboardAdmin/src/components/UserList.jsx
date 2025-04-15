@@ -440,7 +440,7 @@ const UserList = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-gray-800">User Management</h1>
+        <h1 className="text-2xl font-bold text-gray-800">Gestion des utilisateurs</h1>
         <div className="flex items-center space-x-4">
           <div className="relative">
             <input
@@ -463,7 +463,7 @@ const UserList = () => {
             <svg className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
             </svg>
-            Add User
+            Ajouter un utilisateur
           </button>
         </div>
       </div>
@@ -478,9 +478,9 @@ const UserList = () => {
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
-              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">User</th>
+              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Utilisateur</th>
               <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Role</th>
-              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Contact Info</th>
+              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Coordonnées</th>
               <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">CIN</th>
               <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
             </tr>
@@ -528,13 +528,13 @@ const UserList = () => {
                     onClick={() => openEditModal(user)}
                     className="text-indigo-600 hover:text-indigo-900 mr-4"
                   >
-                    Edit
+                  Modifier
                   </button>
                   <button 
                     onClick={() => setConfirmDelete(user.id)}
                     className="text-red-600 hover:text-red-900"
                   >
-                    Delete
+                    Supprimer
                   </button>
                 </td>
               </tr>
@@ -556,7 +556,7 @@ const UserList = () => {
           <div className="bg-white rounded-lg max-w-md w-full max-h-[90vh] overflow-y-auto">
             <div className="p-6">
               <div className="flex justify-between items-center mb-4">
-                <h2 className="text-xl font-bold text-gray-800">Add New User</h2>
+                <h2 className="text-xl font-bold text-gray-800">Ajouter un nouvel utilisateur</h2>
                 <button onClick={closeModal} className="text-gray-500 hover:text-gray-700">
                   <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
@@ -573,7 +573,7 @@ const UserList = () => {
                   )}
                   {/* User Info */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">User Name</label>
+                    <label className="block text-sm font-medium text-gray-700">Nom d'utilisateur</label>
                     <input
                       type="text"
                       name="userName"
@@ -595,7 +595,7 @@ const UserList = () => {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">Password</label>
+                    <label className="block text-sm font-medium text-gray-700">Mot de passe</label>
                     <input
                       type="password"
                       name="password"
@@ -643,7 +643,7 @@ const UserList = () => {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">Phone Number (8 digits)</label>
+                    <label className="block text-sm font-medium text-gray-700">Numéro de téléphone (8 chiffres)</label>
                     <input
                       type="text"
                       name="numéroTéléphone"
@@ -655,7 +655,7 @@ const UserList = () => {
                       className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                       placeholder="Enter 8-digit phone number"
                     />
-                    <small className="text-gray-500">Format: 8 digits (e.g., 54144303)</small>
+                    {/* <small className="text-gray-500">Format: 8 digits (e.g., 54144303)</small> */}
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700">Profile Image</label>
@@ -682,7 +682,7 @@ const UserList = () => {
                         />
                       </div>
                     )}
-                    <small className="text-gray-500">Maximum file size: 5MB</small>
+                    {/* <small className="text-gray-500">Maximum file size: 5MB</small> */}
                   </div>
                 </div>
                 <div className="mt-6 flex justify-end">
@@ -691,13 +691,13 @@ const UserList = () => {
                     onClick={closeModal}
                     className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 mr-3"
                   >
-                    Cancel
+                  Annuler
                   </button>
                   <button
                     type="submit"
                     className="bg-blue-600 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                   >
-                    Add User
+                 Ajouter un utilisateur
                   </button>
                 </div>
               </form>
@@ -712,7 +712,7 @@ const UserList = () => {
           <div className="bg-white rounded-lg max-w-md w-full max-h-[90vh] overflow-y-auto">
             <div className="p-6">
               <div className="flex justify-between items-center mb-4">
-                <h2 className="text-xl font-bold text-gray-800">Edit User</h2>
+                <h2 className="text-xl font-bold text-gray-800">Modifier l'utilisateur</h2>
                 <button onClick={closeModal} className="text-gray-500 hover:text-gray-700">
                   <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />

@@ -15,7 +15,7 @@ import  HomePageSuperviseur from './componenet/superviseur/homepagesuperviseur';
 import Homepageagent from './componenet/agent/homepageagent';
 import GoogleMap from './componenet/website/googlemap';
 import NosAgences from './componenet/website/nosagence';
-import Chatbot from './componenet/website/chatbot';
+// import Chatbot from './componenet/website/chatbot';
 
 // Create a ProtectedRoute component
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
@@ -59,7 +59,7 @@ function App() {
           </Routes>
           
           {/* Chatbot positioned at the bottom of the interface */}
-          <Chatbot />
+          {/* <Chatbot /> */}
         </AuthPersist>
       </Router>
     </ErrorBoundary>

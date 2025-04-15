@@ -17,7 +17,7 @@ const App = () => {
         <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>}>
           <Route index element={
             <div className="max-w-7xl mx-auto">
-              <h2 className="text-3xl font-bold text-gray-900 mb-8">Dashboard Overview</h2>
+              <h2 className="text-3xl font-bold text-gray-900 mb-8">Aperçu  dashboard</h2>
               {/* Add your dashboard content here */}
             </div>
           } />
