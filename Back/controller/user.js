@@ -1,4 +1,4 @@
-const {User}=require ("../database/connection")
+const {User, Contract}=require ("../database/connection")
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const fs = require('fs');
@@ -274,16 +274,27 @@ module.exports={
     },
     getAllUsers: async (req, res) => {
         try {
-            // Check if user is an admin
-            if(req.user.role !== 'admin'){
-                return res.status(403).json({message:"Access denied. Only admins can view all users"})
+            // Check if user is an admin or agent
+            if(req.user.role !== 'admin' && req.user.role !== 'agent'){
+                return res.status(403).json({message:"Access denied. Only admins and agents can view all users"})
             }
             
             const users = await User.findAll({
-                attributes: ['id', 'userName', 'email', 'role', 'imageUrl', 'CIN', 'adresse', 'numéroTéléphone', 'createdAt']
+                attributes: ['id', 'userName', 'email', 'role', 'imageUrl', 'CIN', 'adresse', 'numéroTéléphone', 'createdAt'],
+                include: [{
+                    model: Contract,
+                    as: 'clientContracts',
+                    attributes: ['id', 'type', 'status', 'pdfUrl', 'signatureUrl', 'createdAt'],
+                    include: [{
+                        model: User,
+                        as: 'agent',
+                        attributes: ['id', 'userName', 'email']
+                    }]
+                }],
+                order: [['createdAt', 'DESC']]
             });
             
-            // Process users to format imageUrl
+            // Process users to format imageUrl and organize data
             const formattedUsers = users.map(user => ({
                 id: user.id,
                 userName: user.userName,
@@ -293,7 +304,8 @@ module.exports={
                 CIN: user.CIN,
                 adresse: user.adresse,
                 numéroTéléphone: user.numéroTéléphone,
-                createdAt: user.createdAt
+                createdAt: user.createdAt,
+                contracts: user.clientContracts
             }));
             
             res.status(200).json(formattedUsers);

@@ -202,7 +202,7 @@ const NosAgences = () => {
         // Set the selected agency
         setSelectedAgency(agency);
         
-        // Create info window content
+        // Create info window content 
         const content = `
           <div class="p-3 max-w-md">
             <h2 class="text-xl font-bold">${agency.name}</h2>

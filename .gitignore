@@ -1,0 +1,5 @@
+Back/.env
+Front/.env
+node_modules
+Back\node_modules\.bin
+Front/dist

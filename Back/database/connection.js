@@ -15,8 +15,28 @@ db={}
 db.Sequelize=Sequelize
 db.connection=connection
 
-db.User=require("./model/user")(connection, DataTypes)
+// Import models
+db.User = require("./model/user")(connection, DataTypes)
+db.Contract = require("./model/Contract")(connection, DataTypes)
 
+// Define associations
+db.User.hasMany(db.Contract, { 
+    foreignKey: 'agentId',
+    as: 'agentContracts'
+});
+db.Contract.belongsTo(db.User, { 
+    foreignKey: 'agentId',
+    as: 'agent'
+});
+
+db.User.hasMany(db.Contract, { 
+    foreignKey: 'clientId',
+    as: 'clientContracts'
+});
+db.Contract.belongsTo(db.User, { 
+    foreignKey: 'clientId',
+    as: 'client'
+});
 
 connection.authenticate()
     .then(() => {
@@ -26,13 +46,11 @@ connection.authenticate()
         console.error('Unable to connect to the database:', err);
     });
 
-//     connection.sync({force: true}).then(() => {
+// Uncomment to sync database on startup (BE CAREFUL with force: true in production)
+// connection.sync({force: true}).then(() => {
 //     console.log('Database synced successfully');
 // }).catch((error) => {
 //     console.error('Error syncing database:', error);
 // });
-
-
-
 
 module.exports=db

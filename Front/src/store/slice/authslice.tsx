@@ -9,10 +9,12 @@ interface User {
   email: string;
   role: string;
   imageUrl?: string;
+  contracts?: any[];
 }
 
 interface AuthState {
   user: User | null;
+  users: User[];
   token: string | null;
   isLoading: boolean;
   error: string | null;
@@ -45,6 +47,7 @@ interface ApiError {
 
 const initialState: AuthState = {
   user: JSON.parse(localStorage.getItem('user') || 'null'),
+  users: [],
   token: localStorage.getItem('token'),
   isLoading: false,
   error: null,
@@ -172,6 +175,36 @@ export const updateUser = createAsyncThunk(
   }
 );
 
+export const getAllUsers = createAsyncThunk(
+  'auth/getAllUsers',
+  async (_, { rejectWithValue, getState }) => {
+    try {
+      const state = getState() as { auth: AuthState };
+      const token = state.auth.token;
+      
+      if (!token) {
+        return rejectWithValue('No token found');
+      }
+
+      const response = await axios.get('http://localhost:3000/api/users/all', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      
+      return response.data;
+    } catch (error: any) {
+      if (error.response?.status === 403) {
+        return rejectWithValue('Access denied. Not authorized.');
+      }
+      return rejectWithValue(
+        error.response?.data?.message || 
+        'Failed to fetch users'
+      );
+    }
+  }
+);
+
 const authSlice = createSlice({
   name: 'auth',
   initialState,
@@ -238,6 +271,18 @@ const authSlice = createSlice({
         state.user = action.payload.user;
       })
       .addCase(updateUser.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload as string;
+      })
+      .addCase(getAllUsers.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(getAllUsers.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.users = action.payload;
+      })
+      .addCase(getAllUsers.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload as string;
       });

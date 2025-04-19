@@ -84,7 +84,7 @@ const LoginForm = () => {
             navigate('/homepagesuperviseur');
             break;
           case 'agent':
-            navigate('/homepageagent');
+            navigate('/agent');
             break;
           default:
             throw new Error('Invalid user role');

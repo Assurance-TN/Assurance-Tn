@@ -71,7 +71,7 @@ const Navbar = () => {
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <div className="flex items-center">
-              <Link to="/" className="flex-shrink-0 transition-transform hover:scale-105">
+              <Link to="/homepage" className="flex-shrink-0 transition-transform hover:scale-105">
                 <img className="h-14 w-auto" src={logo1} alt="Seven Assurances" />
               </Link>
             </div>
