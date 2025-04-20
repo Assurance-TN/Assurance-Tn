@@ -86,7 +86,7 @@ const CreateContract = () => {
                 </div>
 
                 <div>
-                    <label className="block text-sm font-medium text-black">Client Name</label>
+                    <label className="block text-sm font-medium text-black">nom de l'agent</label>
                     <input
                         type="text"
                         name="clientName"
@@ -98,7 +98,7 @@ const CreateContract = () => {
                 </div>
 
                 <div>
-                    <label className="block text-sm font-medium text-black">Client Email</label>
+                    <label className="block text-sm font-medium text-black">Email d'assurance</label>
                     <input
                         type="email"
                         name="clientEmail"
@@ -110,7 +110,7 @@ const CreateContract = () => {
                 </div>
 
                 <div>
-                    <label className="block text-sm font-medium text-black">Client Address</label>
+                    <label className="block text-sm font-medium text-black"> Address</label>
                     <input
                         type="text"
                         name="clientAddress"
@@ -122,7 +122,7 @@ const CreateContract = () => {
                 </div>
 
                 <div>
-                    <label className="block text-sm font-medium text-black">Duration</label>
+                    <label className="block text-sm font-medium text-black">Durée</label>
                     <select
                         name="duration"
                         value={formData.duration}
