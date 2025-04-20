@@ -113,7 +113,9 @@ function App() {
               } />
               <Route path="/mes-contrats" element={
                 <ProtectedRoute allowedRoles={['client']}>
-                  <ContractList />
+                  <Homepageclient>
+                    <ContractList />
+                  </Homepageclient>
                 </ProtectedRoute>
               } />
               <Route path="/mes-devis" element={

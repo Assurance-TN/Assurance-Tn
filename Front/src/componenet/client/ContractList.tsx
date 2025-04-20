@@ -127,13 +127,13 @@ const ContractList = () => {
 
     return (
         <div className="max-w-4xl mx-auto p-6">
-            <h2 className="text-2xl font-bold mb-6">My Contracts</h2>
+            <h2 className="text-2xl font-bold mb-6 text-black">Mes contrats</h2>
 
             {showSignaturePad && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
                     <div className="bg-white p-6 rounded-lg">
-                        <h3 className="text-xl font-bold mb-4">Sign Contract</h3>
-                        <div className="border border-gray-300 rounded-lg mb-4">
+                        <h3 className="text-xl font-bold mb-4 text-black">Sign Contract</h3>
+                        <div className="border border-[#3c4191] rounded-lg mb-4">
                             <SignaturePad
                                 ref={ref => setSignaturePad(ref)}
                                 canvasProps={{
@@ -144,21 +144,21 @@ const ContractList = () => {
                         <div className="flex justify-end space-x-4">
                             <button
                                 onClick={handleClearSignature}
-                                className="px-4 py-2 bg-gray-200 rounded-md hover:bg-gray-300"
+                                className="px-4 py-2 bg-gray-200 rounded-md hover:bg-gray-300 text-black"
                             >
-                                Clear
+                                Clair
                             </button>
                             <button
                                 onClick={handleSaveSignature}
-                                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                                className="px-4 py-2 bg-[#3c4191] text-white rounded-md hover:bg-[#eb3238]"
                             >
-                                Save Signature
+                                Enregistrer la signature
                             </button>
                             <button
                                 onClick={() => setShowSignaturePad(false)}
-                                className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700"
+                                className="px-4 py-2 bg-[#eb3238] text-white rounded-md hover:bg-[#3c4191]"
                             >
-                                Cancel
+                                Annuler
                             </button>
                         </div>
                     </div>
@@ -167,26 +167,26 @@ const ContractList = () => {
 
             <div className="space-y-4">
                 {contracts.map(contract => (
-                    <div key={contract.id} className="border rounded-lg p-4">
+                    <div key={contract.id} className="border border-[#3c4191] rounded-lg p-4">
                         <div className="flex justify-between items-start">
                             <div>
-                                <h3 className="text-lg font-semibold">{contract.type}</h3>
-                                <p className="text-gray-600">Duration: {contract.duration}</p>
-                                <p className="text-gray-600">Status: {contract.status}</p>
+                                <h3 className="text-lg font-semibold text-black">{contract.type}</h3>
+                                <p className="text-black">Duration: {contract.duration}</p>
+                                <p className="text-black">Status: {contract.status}</p>
                             </div>
                             <div className="space-x-2">
                                 {contract.pdfUrl && (
                                     <button
                                         onClick={() => handleViewPdf(contract.pdfUrl)}
-                                        className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                                        className="px-4 py-2 bg-[#3c4191] text-white rounded-md hover:bg-[#eb3238]"
                                     >
-                                        View PDF
+                                        Voir PDF
                                     </button>
                                 )}
                                 {contract.status === 'PENDING' && (
                                     <button
                                         onClick={() => handleSignContract(contract.id)}
-                                        className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
+                                        className="px-4 py-2 bg-[#3c4191] text-white rounded-md hover:bg-[#eb3238]"
                                     >
                                         Sign Contract
                                     </button>
@@ -194,7 +194,7 @@ const ContractList = () => {
                             </div>
                         </div>
                         <div className="mt-4">
-                            <p className="text-gray-700">{contract.description}</p>
+                            <p className="text-black">{contract.description}</p>
                         </div>
                     </div>
                 ))}

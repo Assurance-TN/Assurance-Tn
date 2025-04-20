@@ -35,7 +35,7 @@ const ContractIcon = ({ type }: { type: string }) => {
   const Icon = iconMap[type];
   if (!Icon) return null;
 
-  return <Icon className="w-6 h-6 text-purple-600" />;
+  return <Icon className="w-6 h-6 text-white" />;
 };
 
 export default function DemanderUnDevis() {
@@ -126,8 +126,8 @@ export default function DemanderUnDevis() {
         <main className="flex-1 p-8">
           <div className="max-w-7xl mx-auto">
             <div className="mb-8">
-              <h1 className="text-2xl font-bold text-gray-900">Choisir un contrat</h1>
-              <p className="mt-2 text-gray-600">
+              <h1 className="text-2xl font-bold text-black">Choisir un contrat</h1>
+              <p className="mt-2 text-black">
                 Sélectionnez un contrat parmi les options disponibles
               </p>
             </div>
@@ -136,28 +136,28 @@ export default function DemanderUnDevis() {
               {contracts.map((contract) => (
                 <div
                   key={contract.id}
-                  className="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow"
+                  className="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow border border-[#3c4191]"
                 >
                   <div className="flex items-center space-x-4 mb-4">
-                    <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                    <div className="w-12 h-12 bg-[#3c4191] rounded-full flex items-center justify-center">
                       <ContractIcon type={contract.type} />
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold">{contract.type}</h3>
-                      <p className="text-sm text-gray-500">Duration: {contract.duration}</p>
+                      <h3 className="text-lg font-semibold text-black">{contract.type}</h3>
+                      <p className="text-sm text-black">Duration: {contract.duration}</p>
                     </div>
                   </div>
-                  <p className="text-gray-700 mb-4">{contract.description}</p>
+                  <p className="text-black mb-4">{contract.description}</p>
                   <div className="flex justify-between items-center">
                     <button
                       onClick={() => handleViewPdf(contract.pdfUrl)}
-                      className="text-blue-600 hover:text-blue-800"
+                      className="text-black hover:text-[#3c4191]"
                     >
                       View PDF
                     </button>
                     <button
                       onClick={() => handleSelectContract(contract)}
-                      className="px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700"
+                      className="px-4 py-2 bg-[#3c4191] text-white rounded-md hover:bg-[#eb3238]"
                     >
                       Select Contract
                     </button>
@@ -169,8 +169,8 @@ export default function DemanderUnDevis() {
             {showSignaturePad && (
               <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
                 <div className="bg-white p-6 rounded-lg max-w-md w-full">
-                  <h3 className="text-xl font-bold mb-4">Sign Contract</h3>
-                  <div className="border border-gray-300 rounded-lg mb-4">
+                  <h3 className="text-xl font-bold mb-4 text-black">Sign Contract</h3>
+                  <div className="border border-[#3c4191] rounded-lg mb-4">
                     <SignaturePad
                       ref={ref => setSignaturePad(ref)}
                       canvasProps={{
@@ -181,19 +181,19 @@ export default function DemanderUnDevis() {
                   <div className="flex justify-end space-x-4">
                     <button
                       onClick={handleClearSignature}
-                      className="px-4 py-2 bg-gray-200 rounded-md hover:bg-gray-300"
+                      className="px-4 py-2 bg-gray-200 rounded-md hover:bg-gray-300 text-black"
                     >
                       Clear
                     </button>
                     <button
                       onClick={handleSaveSignature}
-                      className="px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700"
+                      className="px-4 py-2 bg-[#3c4191] text-white rounded-md hover:bg-[#eb3238]"
                     >
                       Save Signature
                     </button>
                     <button
                       onClick={() => setShowSignaturePad(false)}
-                      className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700"
+                      className="px-4 py-2 bg-[#eb3238] text-white rounded-md hover:bg-[#3c4191]"
                     >
                       Cancel
                     </button>

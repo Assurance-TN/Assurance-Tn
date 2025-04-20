@@ -120,12 +120,12 @@ const UsersList = () => {
   }, [token]);
 
   if (isLoading) {
-    return <div className="flex justify-center items-center h-screen">Loading...</div>;
+    return <div className="flex justify-center items-center h-screen text-black">Loading...</div>;
   }
 
   if (error) {
     return (
-      <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+      <div className="bg-[#eb3238] text-white px-4 py-3 rounded mb-4">
         {error}
       </div>
     );
@@ -133,45 +133,45 @@ const UsersList = () => {
 
   return (
     <div className="max-w-7xl mx-auto p-6">
-      <h2 className="text-2xl font-bold mb-6">All Users</h2>
+      <h2 className="text-2xl font-bold mb-6 text-black">All Users</h2>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {users.map((user: User) => (
           <div
             key={user.id}
-            className="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow"
+            className="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow border border-[#3c4191]"
           >
             <div className="flex items-center space-x-4 mb-4">
-              <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
-                <span className="text-xl font-semibold text-purple-600">
+              <div className="w-12 h-12 bg-[#3c4191] rounded-full flex items-center justify-center">
+                <span className="text-xl font-semibold text-white">
                   {user.userName.charAt(0).toUpperCase()}
                 </span>
               </div>
               <div>
-                <h3 className="text-lg font-semibold">{user.userName}</h3>
-                <p className="text-sm text-gray-500">{user.email}</p>
-                <p className="text-sm text-gray-500 capitalize">{user.role}</p>
-                {user.CIN && <p className="text-sm text-gray-500">CIN: {user.CIN}</p>}
-                {user.adresse && <p className="text-sm text-gray-500">Address: {user.adresse}</p>}
-                {user.numéroTéléphone && <p className="text-sm text-gray-500">Phone: {user.numéroTéléphone}</p>}
+                <h3 className="text-lg font-semibold text-black">{user.userName}</h3>
+                <p className="text-sm text-black">{user.email}</p>
+                <p className="text-sm text-black capitalize">{user.role}</p>
+                {user.CIN && <p className="text-sm text-black">CIN: {user.CIN}</p>}
+                {user.adresse && <p className="text-sm text-black">Address: {user.adresse}</p>}
+                {user.numéroTéléphone && <p className="text-sm text-black">Phone: {user.numéroTéléphone}</p>}
               </div>
             </div>
 
             {user.contracts && user.contracts.length > 0 && (
               <div className="mt-4">
-                <h4 className="font-semibold mb-2">Contracts</h4>
+                <h4 className="font-semibold mb-2 text-black">Contracts</h4>
                 <div className="space-y-2">
                   {user.contracts.map((contract: Contract) => (
                     <div
                       key={contract.id}
-                      className="p-3 bg-gray-50 rounded-md"
+                      className="p-3 bg-[#3c4191] bg-opacity-10 rounded-md"
                     >
-                      <p className="font-medium">{contract.type}</p>
-                      <p className="text-sm text-gray-600">Status: {contract.status}</p>
+                      <p className="font-medium text-black">{contract.type}</p>
+                      <p className="text-sm text-black">Status: {contract.status}</p>
                       {contract.pdfUrl && (
                         <button
                           onClick={() => handleViewPdf(contract.pdfUrl!)}
-                          className="mt-2 text-white bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-medium transition-colors"
+                          className="mt-2 text-white bg-[#3c4191] hover:bg-[#0e04c3] px-4 py-2 rounded-md text-sm font-medium transition-colors"
                         >
                           View Contract PDF
                         </button>

@@ -15,7 +15,7 @@ import {
 } from '@heroicons/react/24/outline';
 
 const menuItems = [
-  { name: 'Accueil', icon: HomeIcon, path: '/homepageclient', isPurple: true },
+  { name: 'Accueil', icon: HomeIcon, path: '/homepageclient', isActive: true },
   { name: 'choisir le contrat', icon: DocumentTextIcon, path: '/devis' },
   { name: 'Mes contrats', icon: DocumentDuplicateIcon, path: '/mes-contrats' },
   { name: 'Mes devis', icon: DocumentIcon, path: '/mes-devis' },
@@ -42,8 +42,8 @@ export default function Sidebar() {
             <Link
               key={item.name}
               to={item.path}
-              className={`flex items-center px-4 py-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors duration-200
-                ${item.isPurple ? 'bg-purple-700 text-white hover:bg-purple-800' : ''}`}
+              className={`flex items-center px-4 py-3 text-[#0e04c3] rounded-lg hover:bg-[#3c4191] hover:text-white transition-colors duration-200
+                ${item.isActive ? 'bg-[#3c4191] text-white' : ''}`}
             >
               <item.icon className="w-5 h-5 mr-3" />
               <span className="text-sm font-medium">{item.name}</span>
@@ -58,7 +58,7 @@ export default function Sidebar() {
               <Link
                 key={item.name}
                 to={item.path}
-                className="flex items-center px-4 py-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors duration-200"
+                className="flex items-center px-4 py-3 text-[#0e04c3] rounded-lg hover:bg-[#3c4191] hover:text-white transition-colors duration-200"
               >
                 <item.icon className="w-5 h-5 mr-3" />
                 <span className="text-sm font-medium">{item.name}</span>
