@@ -1,4 +1,3 @@
-
 module.exports = (sequelize, DataTypes) => {
 const Contract = sequelize.define('Contract', {
     id: {
@@ -47,6 +46,10 @@ const Contract = sequelize.define('Contract', {
         allowNull: true
     },
     signatureUrl: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
+    logoUrl: {
         type: DataTypes.STRING,
         allowNull: true
     },

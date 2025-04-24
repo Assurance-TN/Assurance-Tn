@@ -14,6 +14,7 @@ interface Contract {
     status: string;
     pdfUrl: string;
     signatureUrl: string;
+    logoUrl: string;
     agentId: number;
     clientId: number;
 }

@@ -12,7 +12,8 @@ const CreateContract = () => {
         clientName: '',
         clientEmail: '',
         clientAddress: '',
-        duration: '6_MONTHS'
+        duration: '6_MONTHS',
+        logoUrl: '/images/logo1.jpg' // Default logo path
     });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -34,7 +35,8 @@ const CreateContract = () => {
                 clientName: '',
                 clientEmail: '',
                 clientAddress: '',
-                duration: '6_MONTHS'
+                duration: '6_MONTHS',
+                logoUrl: '/images/logo1.jpg'
             });
             alert('Contract created successfully!');
         } catch (error) {
@@ -133,6 +135,18 @@ const CreateContract = () => {
                         <option value="6_MONTHS">6 Months</option>
                         <option value="1_YEAR">1 Year</option>
                     </select>
+                </div>
+
+                <div>
+                    <label className="block text-sm font-medium text-black">Logo URL</label>
+                    <input
+                        type="text"
+                        name="logoUrl"
+                        value={formData.logoUrl}
+                        onChange={handleChange}
+                        className="mt-1 block w-full rounded-md border-[#3c4191] shadow-sm focus:border-[#3c4191] focus:ring-[#3c4191]"
+                        required
+                    />
                 </div>
 
                 <button
