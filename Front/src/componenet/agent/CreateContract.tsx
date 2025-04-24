@@ -9,9 +9,10 @@ const CreateContract = () => {
     const [formData, setFormData] = useState({
         type: '',
         description: '',
-        clientName: '',
-        clientEmail: '',
-        clientAddress: '',
+        nameAgent: '',
+        emailAssurance: '',
+        prix: '',
+        adresseAssurance: '',
         duration: '6_MONTHS',
         logoUrl: '/images/logo1.jpg' // Default logo path
     });
@@ -27,14 +28,19 @@ const CreateContract = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            await dispatch(createContract(formData)).unwrap();
+            const dataToSubmit = {
+                ...formData,
+                prix: parseFloat(formData.prix)
+            };
+            await dispatch(createContract(dataToSubmit)).unwrap();
             // Reset form
             setFormData({
                 type: '',
                 description: '',
-                clientName: '',
-                clientEmail: '',
-                clientAddress: '',
+                nameAgent: '',
+                emailAssurance: '',
+                prix: '',
+                adresseAssurance: '',
                 duration: '6_MONTHS',
                 logoUrl: '/images/logo1.jpg'
             });
@@ -88,11 +94,11 @@ const CreateContract = () => {
                 </div>
 
                 <div>
-                    <label className="block text-sm font-medium text-black">nom de l'agent</label>
+                    <label className="block text-sm font-medium text-black">Nom de l'agent</label>
                     <input
                         type="text"
-                        name="clientName"
-                        value={formData.clientName}
+                        name="nameAgent"
+                        value={formData.nameAgent}
                         onChange={handleChange}
                         className="mt-1 block w-full rounded-md border-[#3c4191] shadow-sm focus:border-[#3c4191] focus:ring-[#3c4191]"
                         required
@@ -103,8 +109,8 @@ const CreateContract = () => {
                     <label className="block text-sm font-medium text-black">Email d'assurance</label>
                     <input
                         type="email"
-                        name="clientEmail"
-                        value={formData.clientEmail}
+                        name="emailAssurance"
+                        value={formData.emailAssurance}
                         onChange={handleChange}
                         className="mt-1 block w-full rounded-md border-[#3c4191] shadow-sm focus:border-[#3c4191] focus:ring-[#3c4191]"
                         required
@@ -112,11 +118,25 @@ const CreateContract = () => {
                 </div>
 
                 <div>
-                    <label className="block text-sm font-medium text-black"> Address</label>
+                    <label className="block text-sm font-medium text-black">Prix (TND)</label>
+                    <input
+                        type="number"
+                        name="prix"
+                        value={formData.prix}
+                        onChange={handleChange}
+                        step="0.01"
+                        min="0"
+                        className="mt-1 block w-full rounded-md border-[#3c4191] shadow-sm focus:border-[#3c4191] focus:ring-[#3c4191]"
+                        required
+                    />
+                </div>
+
+                <div>
+                    <label className="block text-sm font-medium text-black">Adresse Assurance</label>
                     <input
                         type="text"
-                        name="clientAddress"
-                        value={formData.clientAddress}
+                        name="adresseAssurance"
+                        value={formData.adresseAssurance}
                         onChange={handleChange}
                         className="mt-1 block w-full rounded-md border-[#3c4191] shadow-sm focus:border-[#3c4191] focus:ring-[#3c4191]"
                         required

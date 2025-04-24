@@ -13,15 +13,19 @@ const Contract = sequelize.define('Contract', {
         type: DataTypes.TEXT,
         allowNull: false
     },
-    clientName: {
+    nameAgent: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    clientEmail: {
+    emailAssurance: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    clientAddress: {
+    prix: {
+        type: DataTypes.DECIMAL(10, 2),
+        allowNull: false
+    },
+    adresseAssurance: {
         type: DataTypes.STRING,
         allowNull: false
     },
@@ -50,6 +54,19 @@ const Contract = sequelize.define('Contract', {
         allowNull: true
     },
     logoUrl: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
+    // Client information (filled when signing)
+    clientUserName: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
+    clientEmail: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
+    clientPhone: {
         type: DataTypes.STRING,
         allowNull: true
     },

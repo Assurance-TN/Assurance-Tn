@@ -64,25 +64,49 @@ const generateContractPDF = async (contract, signaturePath = null) => {
                         lineGap: 10
                     })
                    .font('Helvetica')
-                   .text(value);
+                   .text(value || 'N/A');
             };
 
-            addField('Type', contract.type);
-            addField('Client Name', contract.clientName);
-            addField('Client Email', contract.clientEmail);
-            addField('Client Address', contract.clientAddress);
-            addField('Duration', contract.duration);
-            addField('Start Date', new Date(contract.startDate).toLocaleDateString());
-            addField('End Date', new Date(contract.endDate).toLocaleDateString());
-
-            doc.moveDown(2);
-
-            // Add description
+            // Contract Details
             doc.font('Helvetica-Bold')
-               .fontSize(14)
-               .text('Description:', {
-                    lineGap: 15
-                });
+               .fontSize(16)
+               .text('Contract Information', { underline: true });
+            doc.moveDown();
+
+            addField('Type', contract.type);
+            addField('Duration', contract.duration);
+            addField('Prix', `${contract.prix} TND`);
+            doc.moveDown();
+
+            // Agent Information
+            doc.font('Helvetica-Bold')
+               .fontSize(16)
+               .text('Agent Information', { underline: true });
+            doc.moveDown();
+
+            addField('Agent Name', contract.nameAgent);
+            addField('Email Assurance', contract.emailAssurance);
+            addField('Adresse Assurance', contract.adresseAssurance);
+            doc.moveDown();
+
+            // Client Information (if contract is signed)
+            if (contract.clientUserName) {
+                doc.font('Helvetica-Bold')
+                   .fontSize(16)
+                   .text('Client Information', { underline: true });
+                doc.moveDown();
+
+                addField('Client Name', contract.clientUserName);
+                addField('Client Email', contract.clientEmail);
+                addField('Client Phone', contract.clientPhone);
+                doc.moveDown();
+            }
+
+            // Description
+            doc.font('Helvetica-Bold')
+               .fontSize(16)
+               .text('Description', { underline: true });
+            doc.moveDown();
             
             doc.font('Helvetica')
                .fontSize(12)
@@ -137,9 +161,10 @@ module.exports = {
             const {
                 type,
                 description,
-                clientName,
-                clientEmail,
-                clientAddress,
+                nameAgent,
+                emailAssurance,
+                prix,
+                adresseAssurance,
                 duration,
                 logoUrl
             } = req.body;
@@ -157,9 +182,10 @@ module.exports = {
             const contract = await Contract.create({
                 type,
                 description,
-                clientName,
-                clientEmail,
-                clientAddress,
+                nameAgent,
+                emailAssurance,
+                prix,
+                adresseAssurance,
                 duration,
                 startDate,
                 endDate,
@@ -234,12 +260,21 @@ module.exports = {
                 return res.status(404).json({ message: "Contract not found" });
             }
 
-            // Update contract with signature URL
+            // Get client information
+            const client = await User.findByPk(req.user.userId);
+            if (!client) {
+                return res.status(404).json({ message: "Client not found" });
+            }
+
+            // Update contract with signature URL and client information
             contract.signatureUrl = `/uploads/${signatureFile.filename}`;
             contract.clientId = req.user.userId;
+            contract.clientUserName = client.userName;
+            contract.clientEmail = client.email;
+            contract.clientPhone = client.numéroTéléphone;
             contract.status = 'SIGNED';
 
-            // Generate new PDF with signature
+            // Generate new PDF with signature and client information
             const signaturePath = path.join(__dirname, '..', 'uploads', signatureFile.filename);
             await generateContractPDF(contract, signaturePath);
 
