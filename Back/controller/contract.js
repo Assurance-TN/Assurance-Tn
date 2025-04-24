@@ -21,6 +21,116 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
+// Function to generate PDF with or without signature
+const generateContractPDF = async (contract, signaturePath = null) => {
+    const doc = new PDFDocument({
+        margins: {
+            top: 50,
+            bottom: 50,
+            left: 50,
+            right: 50
+        }
+    });
+
+    const pdfPath = path.join(__dirname, '..', 'uploads', `contract-${contract.id}.pdf`);
+    const pdfStream = fs.createWriteStream(pdfPath);
+
+    return new Promise((resolve, reject) => {
+        doc.pipe(pdfStream);
+
+        try {
+            // Add logo
+            const logoPath = path.join(__dirname, '..', '..', 'Front', 'src', 'componenet', 'website', 'images', 'logo1.jpg');
+            if (fs.existsSync(logoPath)) {
+                doc.image(logoPath, 50, 50, { width: 120 });
+                doc.fontSize(24)
+                   .font('Helvetica-Bold')
+                   .text('Contract Details', 200, 85, {
+                        align: 'left'
+                   });
+                doc.moveDown(6);
+            }
+
+            // Add content
+            doc.font('Helvetica')
+               .fontSize(12)
+               .lineGap(10);
+
+            // Add fields
+            const addField = (label, value) => {
+                doc.font('Helvetica-Bold')
+                   .text(`${label}: `, {
+                        continued: true,
+                        lineGap: 10
+                    })
+                   .font('Helvetica')
+                   .text(value);
+            };
+
+            addField('Type', contract.type);
+            addField('Client Name', contract.clientName);
+            addField('Client Email', contract.clientEmail);
+            addField('Client Address', contract.clientAddress);
+            addField('Duration', contract.duration);
+            addField('Start Date', new Date(contract.startDate).toLocaleDateString());
+            addField('End Date', new Date(contract.endDate).toLocaleDateString());
+
+            doc.moveDown(2);
+
+            // Add description
+            doc.font('Helvetica-Bold')
+               .fontSize(14)
+               .text('Description:', {
+                    lineGap: 15
+                });
+            
+            doc.font('Helvetica')
+               .fontSize(12)
+               .text(contract.description, {
+                    indent: 20,
+                    align: 'justify',
+                    lineGap: 10
+                });
+
+            // Add signature if provided
+            if (signaturePath && fs.existsSync(signaturePath)) {
+                doc.moveDown(4);
+                doc.font('Helvetica-Bold')
+                   .fontSize(14)
+                   .text('Client Signature:', {
+                        lineGap: 15
+                    });
+                
+                // Add signature image
+                doc.image(signaturePath, {
+                    width: 200,
+                    align: 'left'
+                });
+
+                // Add signature date
+                doc.moveDown();
+                doc.font('Helvetica')
+                   .fontSize(12)
+                   .text(`Signed on: ${new Date().toLocaleDateString()}`, {
+                        align: 'left'
+                    });
+            }
+
+            doc.end();
+
+            pdfStream.on('finish', () => {
+                resolve(pdfPath);
+            });
+
+            pdfStream.on('error', (error) => {
+                reject(error);
+            });
+        } catch (error) {
+            reject(error);
+        }
+    });
+};
+
 module.exports = {
     createContract: async (req, res) => {
         try {
@@ -57,87 +167,8 @@ module.exports = {
                 agentId: req.user.userId
             });
 
-            // Generate PDF
-            const doc = new PDFDocument({
-                margins: {
-                    top: 50,
-                    bottom: 50,
-                    left: 50,
-                    right: 50
-                }
-            });
-            const pdfPath = path.join(__dirname, '..', 'uploads', `contract-${contract.id}.pdf`);
-            const pdfStream = fs.createWriteStream(pdfPath);
-
-            doc.pipe(pdfStream);
-
-            // Add logo to PDF if provided
-            if (logoUrl) {
-                try {
-                    const logoPath = path.join(__dirname, '..', '..', 'Front', 'src', 'componenet', 'website', 'images', 'logo1.jpg');
-                    if (fs.existsSync(logoPath)) {
-                        // Position logo on the left
-                        doc.image(logoPath, 50, 50, { width: 120 });
-                        
-                        // Add title next to the logo
-                        doc.fontSize(24)
-                           .font('Helvetica-Bold')
-                           .text('Contract Details', 200, 85, {
-                                align: 'left'
-                           });
-
-                        // Move cursor below logo and title
-                        doc.moveDown(6);
-                    }
-                } catch (error) {
-                    console.error('Error adding logo to PDF:', error);
-                }
-            }
-
-            // Add content to PDF with improved formatting
-            doc.font('Helvetica')
-               .fontSize(12)
-               .lineGap(10);
-
-            // Create a function for consistent label formatting
-            const addField = (label, value) => {
-                doc.font('Helvetica-Bold')
-                   .text(`${label}: `, {
-                        continued: true,
-                        lineGap: 10
-                    })
-                   .font('Helvetica')
-                   .text(value);
-            };
-
-            // Add fields with consistent formatting
-            addField('Type', type);
-            addField('Client Name', clientName);
-            addField('Client Email', clientEmail);
-            addField('Client Address', clientAddress);
-            addField('Duration', duration);
-            addField('Start Date', startDate.toLocaleDateString());
-            addField('End Date', endDate.toLocaleDateString());
-
-            // Add space before description
-            doc.moveDown(2);
-
-            // Add description with proper formatting
-            doc.font('Helvetica-Bold')
-               .fontSize(14)
-               .text('Description:', {
-                    lineGap: 15
-                });
-            
-            doc.font('Helvetica')
-               .fontSize(12)
-               .text(description, {
-                    indent: 20,
-                    align: 'justify',
-                    lineGap: 10
-                });
-
-            doc.end();
+            // Generate initial PDF
+            await generateContractPDF(contract);
 
             // Update contract with PDF URL
             contract.pdfUrl = `/uploads/contract-${contract.id}.pdf`;
@@ -203,10 +234,15 @@ module.exports = {
                 return res.status(404).json({ message: "Contract not found" });
             }
 
-            // Update contract with signature and client ID
+            // Update contract with signature URL
             contract.signatureUrl = `/uploads/${signatureFile.filename}`;
             contract.clientId = req.user.userId;
             contract.status = 'SIGNED';
+
+            // Generate new PDF with signature
+            const signaturePath = path.join(__dirname, '..', 'uploads', signatureFile.filename);
+            await generateContractPDF(contract, signaturePath);
+
             await contract.save();
 
             res.status(200).json({
